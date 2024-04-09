@@ -1,7 +1,10 @@
-* 
+/* 
   Compuertas Lógicas - ARDUINO UNO R3
   Benjamin Hernández Herrera
 */
+
+
+int option = 0;
 
 // Declaración de las Compuertas Lógicas
 
@@ -20,17 +23,56 @@ void setup()
     pinMode(3, INPUT);
     pinMode(4, OUTPUT);
   
+    // Entradas binarias de selección
+    pinMode(8, INPUT);
+    pinMode(9, INPUT);
+    pinMode(10, INPUT);
+
+    // Se inicializa el puerto Serial
+    Serial.begin(9600);
 }
 
 void loop()
 {
-    // not_bit(3, 4);
-    and_bit(2,3,4);
-    //nand_bit(2,3,4);
-    //or_bit(2,3,4);
-    //nor_bit(2,3,4);
-    //xor_bit(2,3,4);
-    //xnor_bit(2,3,4);
+    //Se lee de forma binaria la entrada del DIP-SWITCH
+
+    option = digitalRead(8) + 2*digitalRead(9) + 4*digitalRead(10);
+    Serial.println(option);
+
+    // En base a la opción se escoge la compuerta lógica
+    switch(option){
+        case 0: 
+            Serial.println("Compuerta Logica - NOT");
+            not_bit(3, 4);
+        break;
+        case 1:
+            Serial.println("Compuerta Logica - AND");
+            and_bit(2,3,4);
+        break;
+        case 2:
+            Serial.println("Compuerta Logica - NAND");
+            nand_bit(2,3,4);
+        break;
+        case 3:
+            Serial.println("Compuerta Logica - OR");
+            or_bit(2,3,4);
+        break;
+        case 4:
+            Serial.println("Compuerta Logica - NOR");
+            nor_bit(2,3,4);
+        break;
+        case 5:
+            Serial.println("Compuerta Logica - XOR");
+            xor_bit(2,3,4);
+        break;
+        case 6:
+            Serial.println("Compuerta Logica - XNOR");
+            xnor_bit(2,3,4);
+        break;
+        default:
+            Serial.println("Opcion NO VALIDA");
+        break;
+    }
 }
 
 // Definición de las Compuertas Lógicas

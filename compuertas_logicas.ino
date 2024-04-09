@@ -1,4 +1,4 @@
-* 
+/* 
   Compuertas Lógicas - ARDUINO UNO R3
   Benjamin Hernández Herrera
 */
